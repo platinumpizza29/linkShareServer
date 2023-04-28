@@ -3,16 +3,13 @@ require("../services/connection");
 const Posts = require("../models/postModel");
 const verify = require("../services/verifyToken");
 
-router.get("/", verify, (req, res) => {
-  res.json({
-    posts: {
-      title: "Posts",
-      description: "All posts",
-    },
-  });
+//get all posts irrespective of the user
+router.get("/allPosts", verify, async (req, res) => {
+  var allPosts = await Posts.find();
+  return res.send(allPosts).status(200);
 });
 
-router.post("/", verify, (req, res) => {
+router.post("/addPost", verify, async (req, res) => {
   const email = req.body.email;
   const link = req.body.link;
   const date = req.body.date;
@@ -25,10 +22,12 @@ router.post("/", verify, (req, res) => {
     time: time,
     category: category,
   });
-  post.save().catch((e) => {
-    res.sendStatus(500);
-  });
-  res.send(post).status(200);
+  try {
+    await post.save();
+    return res.sendStatus(200).send(post);
+  } catch (error) {
+    return res.sendStatus(500).send(error);
+  }
 });
 
 module.exports = router;

@@ -13,4 +13,4 @@ app.use("/posts", postRoute);
 app.use("/auth", userAuthRoute);
 
 //port
-app.listen(3000);
+app.listen(4000);

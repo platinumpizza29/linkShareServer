@@ -17,9 +17,13 @@ router.post("/login", async (req, res) => {
     return res.status(400).send("Invalid Password");
   }
   //create a token
-  const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, {
-    expiresIn: "1h",
-  });
+  const token = jwt.sign(
+    { _id: user._id, email: user.email, username: user.username },
+    process.env.JWT_SECRET,
+    {
+      expiresIn: "1h",
+    }
+  );
   res.header("auth-token", token).status(200).send(token);
 });
 
@@ -49,9 +53,9 @@ router.post("/register", async (req, res) => {
   });
   try {
     const savedUser = user.save();
-    res.send(user).status(201);
+    return res.send(user).status(201);
   } catch (error) {
-    res.send(error).status(400);
+    return res.send(error).status(400);
   }
 });
 
