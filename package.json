@@ -5,6 +5,7 @@
   "main": "app.js",
   "scripts": {
     "start": "nodemon app.js"
+    "test": "node app.js"
   },
   "author": "Keyur Bilgi",
   "license": "ISC",
