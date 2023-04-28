@@ -4,8 +4,7 @@
   "description": "link post server",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon app.js",
-    "test": "node app.js"
+    "start": "nodemon app.js"
   },
   "author": "Keyur Bilgi",
   "license": "ISC",

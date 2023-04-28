@@ -24,9 +24,9 @@ router.post("/addPost", verify, async (req, res) => {
   });
   try {
     await post.save();
-    return res.sendStatus(200).send(post);
+    return res.send(post).status(200);
   } catch (error) {
-    return res.sendStatus(500).send(error);
+    return res.send(error).status(500);
   }
 });
 

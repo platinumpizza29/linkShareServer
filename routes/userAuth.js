@@ -52,7 +52,7 @@ router.post("/register", async (req, res) => {
     fullName: fullName,
   });
   try {
-    const savedUser = user.save();
+    await user.save();
     return res.send(user).status(201);
   } catch (error) {
     return res.send(error).status(400);
